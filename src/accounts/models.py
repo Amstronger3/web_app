@@ -41,6 +41,15 @@ class Following(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
 
+class Publication(models.Model):
+    date = models.DateTimeField(blank=True, null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    body = models.FileField(upload_to='uploads/')
+    description = models.TextField()
+    comment = models.TextField()
 
+    def publish(self):
+        self.published_date = datetime.now()
+        self.save()
 
 

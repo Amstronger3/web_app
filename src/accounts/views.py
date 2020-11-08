@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
-from accounts.forms import ProfileAddForm, ProfileEditForm
+from accounts.forms import ProfileAddForm, ProfileEditForm, PublicationBaseForm
 from accounts.models import Profile
 
 
@@ -92,3 +92,12 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
         success_url = self.get_success_url()
         self.object.delete()
         return HttpResponseRedirect(success_url)
+
+    
+class PublicationCreateView(CreateView):
+    model = Publication
+    template_name = 'publication.html'
+    form_class = PublicationBaseForm
+    
+    def get_success_url(self):
+        return reverse('profiles:publication')

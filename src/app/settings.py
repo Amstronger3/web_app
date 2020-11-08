@@ -142,6 +142,15 @@ LOGGING = {
             'style': '{',
         }
     },
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+        'skip_empty_description_post': {
+            '()': 'django.utils.log.CallbackFilter',
+            'callback': empty_description,
+        },
+    },
     'handlers': {
         'file': {
             'level': 'INFO',
